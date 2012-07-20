@@ -30,6 +30,7 @@
     "coffee-script" : "*",
     "mocha"  : "*",
     "should" : "*",
+    "sinon"  : "*",
     "zombie" : "*",
     "growl"  : "*"
   },
