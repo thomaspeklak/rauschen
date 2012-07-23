@@ -25,12 +25,14 @@
     "monitor"
   ],
   "dependencies" : {
+    "express" : "*"
   },
   "devDependencies": {
     "coffee-script" : "*",
     "mocha"  : "*",
     "should" : "*",
     "sinon"  : "*",
+    "supertest" : "*",
     "zombie" : "*",
     "growl"  : "*"
   },
