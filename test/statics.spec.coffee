@@ -10,4 +10,3 @@ describe "Frontend", ->
       .expect("200")
       .expect(/Rauschen/, done)
 
-
