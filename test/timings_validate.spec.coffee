@@ -1,5 +1,5 @@
-normalize = require "../frontend/lib/timings_normalize.js"
-validate = require "../frontend/lib/timings_validate.js"
+normalize = require "../frontend/lib/timings_normalize"
+validate = require "../frontend/lib/timings_validate"
 timing_factory = require "./factories/timing"
 
 describe 'Validate', ->

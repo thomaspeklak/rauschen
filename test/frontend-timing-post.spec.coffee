@@ -1,5 +1,5 @@
 request = require "supertest"
-app = require "../frontend/server.js"
+app = require "../frontend/server"
 
 timing_factory = require "./factories/timing"
 
