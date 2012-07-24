@@ -1,4 +1,4 @@
-normalize = require "../frontend/lib/timings_normalize"
+normalize = require "../frontend/lib/timings_normalize.js"
 timing_factory = require "./factories/timing"
 
 describe "Normalize", ->
