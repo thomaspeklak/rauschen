@@ -10,7 +10,7 @@ describe "Frontend", ->
       .send(
         timing_factory.valid()
       )
-        .expect(204, done)
+      .expect(204, done)
 
   it "should respons with 200 when statistics with invalid timestamps are posted", (done) ->
     request(app)

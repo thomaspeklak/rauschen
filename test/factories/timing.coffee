@@ -29,11 +29,19 @@ valid_timings =
     "redirectCount" : 0
     "type"          : 0
 
+clone = (obj) ->
+  if not obj? or typeof obj isnt 'object'
+    return obj
+  newInstance = {}
+  for key of obj
+    newInstance[key] = clone obj[key]
+  newInstance
+
 module.exports =
   valid: ->
-    valid_timings
+    clone valid_timings
   invalid: ->
-    invalid_timings = valid_timings
+    invalid_timings = clone valid_timings
     invalid_timings.timing.navigationStart = valid_timings.timing.responseEnd
     invalid_timings
 
