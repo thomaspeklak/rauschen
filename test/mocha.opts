@@ -4,3 +4,4 @@
 --compilers coffee:coffee-script
 --watch
 --growl
+--recursive

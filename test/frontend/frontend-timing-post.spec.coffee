@@ -1,7 +1,7 @@
 request = require "supertest"
-app = require "../frontend/server.js"
+app = require "../../frontend/server.js"
 
-timing_factory = require "./factories/timing"
+timing_factory = require "../factories/timing"
 
 describe "Frontend", ->
   it "should respond with 204 when valid statistics are posted", (done) ->
@@ -19,3 +19,5 @@ describe "Frontend", ->
         timing_factory.invalid()
       )
       .expect(400, done)
+
+  it "should send valid timing data along with request data to a queue"

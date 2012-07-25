@@ -1,6 +1,6 @@
-normalize = require "../frontend/lib/timings_normalize.js"
-validate = require "../frontend/lib/timings_validate.js"
-timing_factory = require "./factories/timing"
+normalize = require "../../frontend/lib/timings_normalize.js"
+validate = require "../../frontend/lib/timings_validate.js"
+timing_factory = require "../factories/timing"
 
 describe 'Validate', ->
   it "should return true on valid timings", ->

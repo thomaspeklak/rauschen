@@ -1,5 +1,5 @@
-normalize = require "../frontend/lib/timings_normalize.js"
-timing_factory = require "./factories/timing"
+normalize = require "../../frontend/lib/timings_normalize.js"
+timing_factory = require "../factories/timing"
 
 describe "Normalize", ->
   it "should normalize values to the navigationStart", ->
