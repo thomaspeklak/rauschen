@@ -1,5 +1,6 @@
 request = require "supertest"
 app = require "../../frontend/server.js"
+sinon = require "sinon"
 
 timing_factory = require "../factories/timing"
 
@@ -20,4 +21,15 @@ describe "Frontend", ->
       )
       .expect(400, done)
 
-  it "should send valid timing data along with request data to a queue"
+  it "should send valid timing data along with request data to the event system", (done) ->
+    queue =
+      create: sinon.spy()
+    app.queue(queue)
+
+    request(app)
+      .post("/")
+      .send(timing_factory.valid())
+      .end( (err, res) ->
+        queue.create.called.should.be.true
+        done()
+      )
