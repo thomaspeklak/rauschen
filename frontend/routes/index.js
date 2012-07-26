@@ -2,17 +2,23 @@ var normalize = require("../lib/timings_normalize.js");
 var validate = require("../lib/timings_validate.js");
 
 module.exports = function(app){
-	app.post("/", function(req, res){
-		var statistics = req.body;
+  app.post("/", function(req, res){
+    var performance = req.body;
 
-		if(validate(statistics.timing)){
-      statistics.timing = normalize(statistics.timing);
-      app.queue().create();
+    if(validate(performance.timing)){
+      app.queue().create('timing',
+                         {
+                           performance: performance,
+                           userAgent: req.headers["user-agent"],
+                           referer: req.headers.referer,
+                           remoteAddress: req.connection.remoteAddress
+                         }
+                        );
 
-			res.send(204);
-		} else {
-			res.send(400);
-		}
-	});
+      res.send(204);
+    } else {
+      res.send(400);
+    }
+  });
 };
 
