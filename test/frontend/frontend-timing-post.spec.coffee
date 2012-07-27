@@ -26,9 +26,9 @@ describe "Frontend", ->
     referer = "http://rauschen.info"
     remoteAddress = "127.0.0.1"
 
-    queue =
+    job =
       create: sinon.spy()
-    app.queue(queue)
+    app.job(job)
 
     request(app)
       .post("/")
@@ -36,8 +36,8 @@ describe "Frontend", ->
       .set("Referer", referer)
       .send(timing_factory.valid())
       .end( (err, res) ->
-        queue.create.calledOnce.should.be.true
-        queue.create.calledWithExactly('timing',
+        job.create.calledOnce.should.be.true
+        job.create.calledWithExactly('timing',
           performance: timing_factory.valid()
           userAgent: userAgent
           referer: referer

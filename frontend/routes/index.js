@@ -6,7 +6,7 @@ module.exports = function(app){
     var performance = req.body;
 
     if(validate(performance.timing)){
-      app.queue().create('timing',
+      app.job().create('timing',
                          {
                            performance: performance,
                            userAgent: req.headers["user-agent"],

@@ -1,16 +1,15 @@
 var express = require("express");
-var queue = { create: function(){}};
+var job = { create: function(){}};
 
 app = express.createServer();
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.bodyParser());
 
-app.queue = function(newQueue){
-  if(newQueue){
-    queue = newQueue; return this;
+app.job = function(newQueue){ if(newQueue){
+    job = newQueue; return this;
   } else {
-    return queue;
+    return job;
   }
 };
 
