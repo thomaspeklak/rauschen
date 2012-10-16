@@ -3,7 +3,6 @@ var DomainValidator = function(domains){
 };
 
 DomainValidator.prototype.validate =function(domain){
-	console.log('##########' + domain);
 	return this.domains.some(function(valid_domain){
 		return domain == valid_domain;
 	});
