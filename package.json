@@ -25,7 +25,8 @@
     "monitor"
   ],
   "dependencies" : {
-    "express" : "*"
+    "express" : "*",
+	"redis" : "*"
   },
   "devDependencies": {
     "coffee-script" : "*",

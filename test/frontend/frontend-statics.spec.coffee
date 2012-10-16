@@ -1,5 +1,6 @@
 request = require "supertest"
 app = require "../../frontend/server.js"
+app.domainValidator = new require('../factories/domain-validator.js')(true);
 
 describe "Frontend", ->
   it "should serve static files", (done) ->

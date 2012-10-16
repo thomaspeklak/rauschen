@@ -3,19 +3,24 @@ var validate = require("../lib/timings_validate.js");
 
 module.exports = function(app){
   app.post("/", function(req, res){
+	if(!app.domainValidator.validate(req.headers.referrer)) {
+		res.send(403);
+		return;
+	}
+
     var performance = req.body;
 
     if(validate(performance.timing)){
       app.job().create('timing',
-                         {
-                           performance: performance,
-                           userAgent: req.headers["user-agent"],
-                           referer: req.headers.referer,
-                           remoteAddress: req.connection.remoteAddress
-                         }
-                        );
+                       {
+                         performance: performance,
+                         userAgent: req.headers["user-agent"],
+                         referer: req.headers.referer,
+                         remoteAddress: req.connection.remoteAddress
+                       }
+                      );
 
-      res.send(204);
+                      res.send(204);
     } else {
       res.send(400);
     }

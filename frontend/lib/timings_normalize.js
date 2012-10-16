@@ -1,13 +1,13 @@
-module.exports = function(timings){
-	var base = timings.navigationStart;
+module.exports = function(timings) {
+    var base = timings.navigationStart;
 
-	var normalized_timings = {};
+    var normalized_timings = {};
 
-	for(var key in timings){
-		if(timings[key] !== 0){
-			normalized_timings[key] = timings[key] - base;
-		}
-	};
+    for (var key in timings) {
+        if (timings[key] !== 0) {
+            normalized_timings[key] = timings[key] - base;
+        }
+    };
 
-	return normalized_timings
+    return normalized_timings
 };

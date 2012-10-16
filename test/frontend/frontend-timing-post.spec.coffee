@@ -1,5 +1,7 @@
 request = require "supertest"
 app = require "../../frontend/server.js"
+DomainValidator = require('../factories/domain-validator.js')
+app.domainValidator = new DomainValidator(true)
 sinon = require "sinon"
 
 timing_factory = require "../factories/timing"
@@ -43,6 +45,5 @@ describe "Frontend", ->
           referer: referer
           remoteAddress: remoteAddress
         ).should.be.true
-
         done()
       )
