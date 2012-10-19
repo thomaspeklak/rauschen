@@ -19,5 +19,6 @@ describe "Validate domain", ->
     domain_validator(null, {headers: {referrer: "unregistered.domain.com"}}, res, callback)
     callback.called.should.be.false
     res.send.called.should.be.true
+    res.send.calledWith(403).should.be.true
 
 
