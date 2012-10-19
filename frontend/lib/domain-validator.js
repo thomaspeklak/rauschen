@@ -1,11 +1,16 @@
-var DomainValidator = function(domains){
-	this.domains = domains;
-};
-
-DomainValidator.prototype.validate =function(domain){
-	return this.domains.some(function(valid_domain){
+var is_valid_domain = function(domains, domain){
+	return domains.some(function(valid_domain){
 		return domain == valid_domain;
 	});
 };
 
-module.exports = DomainValidator;
+module.exports = function(domains){
+	return function(err, req, res, next){
+		var domain = req.headers.referrer;
+		if(is_valid_domain(domains, domain)){
+			next();
+		} else {
+			res.send(403);
+		}
+	};
+};

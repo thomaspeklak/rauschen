@@ -3,11 +3,6 @@ var validate = require("../lib/timings_validate.js");
 
 module.exports = function(app){
   app.post("/", function(req, res){
-	if(!app.domainValidator.validate(req.headers.referrer)) {
-		res.send(403);
-		return;
-	}
-
     var performance = req.body;
 
     if(validate(performance.timing)){
