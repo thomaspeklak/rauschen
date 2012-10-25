@@ -28,22 +28,18 @@ describe "Frontend", ->
     referer = "http://rauschen.info"
     remoteAddress = "127.0.0.1"
 
-    job =
-      create: sinon.spy()
-    app.job(job)
-
+    app.on('data', (data) ->
+      data.should.eql(
+        performance: timing_factory.valid()
+        userAgent: userAgent
+        referer: referer
+        remoteAddress: remoteAddress
+      )
+      done()
+    )
     request(app)
       .post("/")
       .set("User-Agent", userAgent)
       .set("Referer", referer)
       .send(timing_factory.valid())
-      .end( (err, res) ->
-        job.create.calledOnce.should.be.true
-        job.create.calledWithExactly('timing',
-          performance: timing_factory.valid()
-          userAgent: userAgent
-          referer: referer
-          remoteAddress: remoteAddress
-        ).should.be.true
-        done()
-      )
+      .end( (err, res) ->)
