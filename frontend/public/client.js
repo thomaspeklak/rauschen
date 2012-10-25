@@ -1,14 +1,19 @@
 (function(){
-  // Rauschen
-	if(typeof window.performance === "undefined") return;
-	if(typeof document.addEventListener === "undefined") return;
+    // Rauschen
+    if(typeof window.performance === "undefined") return;
+    if(typeof document.addEventListener === "undefined") return;
 
-	var sendPerformanceData = function(){
-		var xhr = new XMLHttpRequest();
-		//@TODO find a way to make this domain dynamic
-		xhr.open("POST", "http://performance.com", true);
-		xhr.send(window.performance);
-	}
+    var sendPerformanceData = function(){
+        var xhr = new XMLHttpRequest();
+        //@TODO find a way to make this domain dynamic
+        xhr.open("POST", "http://localhost:3000", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify(window.performance));
+    };
 
-	document.addEventListener("load", sendPerformanceData);
+    if(document.readyState === 'complete'||document.readyState == "loaded"){
+        sendPerformanceData();
+    } else {
+        window.addEventListener("load", sendPerformanceData);
+    }
 }).call();

@@ -6,7 +6,7 @@ var is_valid_domain = function(domains, domain){
 
 module.exports = function(domains){
 	return function(err, req, res, next){
-		var domain = req.headers.referrer;
+		var domain = req.headers.referer.replace(/.*?\/\//,'').replace(/\/.*/,'');
 		if(is_valid_domain(domains, domain)){
 			next();
 		} else {

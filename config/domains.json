@@ -1,4 +1,5 @@
 [
 	"127.0.0.1",
-	"test.com"
+	"test.com",
+    "localhost:8000"
 ]
