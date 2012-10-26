@@ -8,7 +8,9 @@ var timingStream = timing.createStream();
 
 timingStream.pipe(net.connect(socket)).pipe(timingStream);
 
+var counter = 0;
+
 timing.on('update', function(key){
-    console.log('UPDATE');
+    console.log('UPDATE' + counter++);
 });
 
