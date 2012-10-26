@@ -26,7 +26,8 @@
   ],
   "dependencies" : {
     "express" : "*",
-    "scuttlebutt" : "*"
+    "scuttlebutt" : "*",
+    "ecstatic" : "*"
   },
   "devDependencies": {
     "coffee-script" : "*",
