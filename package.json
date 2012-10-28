@@ -29,7 +29,8 @@
     "scuttlebutt" : "*",
     "ecstatic" : "*",
     "geoip" : "*",
-    "async" : "*"
+    "async" : "*",
+    "useragent" : "*"
   },
   "devDependencies": {
     "coffee-script" : "*",
