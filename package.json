@@ -28,7 +28,8 @@
     "express" : "*",
     "scuttlebutt" : "*",
     "ecstatic" : "*",
-    "geoip" : "*"
+    "geoip" : "*",
+    "async" : "*"
   },
   "devDependencies": {
     "coffee-script" : "*",
