@@ -27,7 +27,8 @@
   "dependencies" : {
     "express" : "*",
     "scuttlebutt" : "*",
-    "ecstatic" : "*"
+    "ecstatic" : "*",
+    "geoip" : "*"
   },
   "devDependencies": {
     "coffee-script" : "*",
