@@ -16,7 +16,7 @@ timing.on("update", function(key){
     });
 
     userAgentDetector(data.userAgent, function(userAgentData){
-        data.browser = userAgentData;
+        data.userAgentData = userAgentData;
     });
 });
 
