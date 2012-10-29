@@ -1,4 +1,5 @@
 var net               = require("net");
+var async             = require("async");
 var Scuttlebutt       = require("scuttlebutt/model");
 var timing            = new Scuttlebutt();
 var socket            = "/tmp/rauschen.sock";
@@ -10,23 +11,28 @@ var timingStream = timing.createStream();
 timingStream.pipe(net.connect(socket)).pipe(timingStream);
 
 timing.on("update", function(key){
-    var data = timing.data;
+    var timingData = timing.get(key);
+    process(timingData);
+});
+
+var process = function(data){
     async.parallel({
-        geo: function(){
-            geoDataProvider(data.remoteAddress, function(geoData){
+        geo: function(cb){
+            processGeoData(data.remoteAddress, function(err, geoData){
                 data.geo = geoData;
+                cb();
             });
         },
-        userAgent: function(){
-            userAgentDetector(data.userAgent, function(userAgentData){
+        ua: function(cb){
+            processUserAgent(data.userAgent, function(err, userAgentData){
                 data.userAgentData = userAgentData;
+                cb();
             });
         }
-    },
-    function(){
-        console.log('done');
+    }, function(err, result){
+        console.dir(data);
     });
-});
+};
 
 
 
