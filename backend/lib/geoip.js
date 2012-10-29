@@ -6,7 +6,7 @@ var city_v6     = new geoip.City6(process.env.GEOIP_CITY_DAT_V6);
 var async       = require("async");
 
 module.exports = function(ip, cb){
-    var city_lookup, country_lookup;
+    var city, country;
 
     if(ip.indexOf(":") >= 0){
         city = city_v6;
