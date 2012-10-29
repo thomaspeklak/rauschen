@@ -1,50 +1,52 @@
 {
-  "name": "rauschen",
-  "preferGlobal": "true",
-  "version": "0.0.0",
-  "author": "Thomas Peklak <thomas.peklak@gmail.com>",
-  "description": "a website performance monitor that leverages window.performance.timing",
-  "contributors": [ 
-    {
-      "name": "Thomas Peklak",
-      "email": "thomas.peklak@gmail.com"
+    "name": "rauschen",
+    "preferGlobal": "true",
+    "version": "0.0.0",
+    "author": "Thomas Peklak <thomas.peklak@gmail.com>",
+    "description": "a website performance monitor that leverages window.performance.timing",
+    "contributors": [ 
+        {
+        "name": "Thomas Peklak",
+        "email": "thomas.peklak@gmail.com"
     } 
-  ],
-  "scripts": {
-    "test": "node_modules/mocha/bin/mocha"
-  },
-  "main": "./lib/rauschen",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "keywords": [
-    "server",
-    "web",
-    "performance",
-    "monitor"
-  ],
-  "dependencies" : {
-    "express" : "*",
-    "scuttlebutt" : "*",
-    "ecstatic" : "*",
-    "geoip" : "*",
-    "async" : "*",
-    "useragent" : "*"
-  },
-  "devDependencies": {
-    "coffee-script" : "*",
-    "mocha"  : "*",
-    "should" : "*",
-    "sinon"  : "*",
-    "supertest" : "*",
-    "zombie" : "*",
-    "growl"  : "*"
-  },
-  "bundleDependencies": [
-  ],
-  "license": "MIT",
-  "engine": {
-    "node": ">=0.8"
-  }
+    ],
+    "scripts": {
+        "test": "node_modules/mocha/bin/mocha"
+    },
+    "main": "./lib/rauschen",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "keywords": [
+        "server",
+        "web",
+        "performance",
+        "monitor"
+    ],
+    "dependencies" : {
+        "express"       : "*"
+        , "scuttlebutt" : "*"
+        , "ecstatic"    : "*"
+        , "geoip"       : "*"
+        , "async"       : "*"
+        , "useragent"   : "*"
+        , "through"     : "*"
+        , "stream-serializer" : "*"
+    },
+    "devDependencies": {
+        "coffee-script" : "*"
+        , "mocha"       : "*"
+        , "should"      : "*"
+        , "sinon"       : "*"
+        , "supertest"   : "*"
+        , "zombie"      : "*"
+        , "growl"       : "*"
+    },
+    "bundleDependencies": [
+    ],
+    "license": "MIT",
+    "engine": {
+        "node": ">=0.8"
+    }
 }
