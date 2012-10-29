@@ -1,9 +1,9 @@
-var net         = require("net");
-var Scuttlebutt = require("scuttlebutt/model");
-var timing      = new Scuttlebutt();
-var socket      = "/tmp/rauschen.sock";
-var geoData     = require("./lib/geoip.js");
-var browserData = require("./lib/browser.js");
+var net               = require("net");
+var Scuttlebutt       = require("scuttlebutt/model");
+var timing            = new Scuttlebutt();
+var socket            = "/tmp/rauschen.sock";
+var geoDataProvider   = require("./lib/geoip.js");
+var userAgentDetector = require("./lib/user-agent-detector.js");
 
 var timingStream = timing.createStream();
 
@@ -11,12 +11,12 @@ timingStream.pipe(net.connect(socket)).pipe(timingStream);
 
 timing.on("update", function(key){
     var data = timing.data;
-    geoData(data.remoteAddress, function(data){
-        data.geo = data;
+    geoDataProvider(data.remoteAddress, function(geoData){
+        data.geo = geoData;
     });
 
-    browserData(data.userAgent, function(data){
-        data.browser = data;
+    userAgentDetector(data.userAgent, function(userAgentData){
+        data.browser = userAgentData;
     });
 });
 
