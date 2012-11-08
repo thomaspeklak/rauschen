@@ -4,8 +4,7 @@ var timing               = new Scuttlebutt();
 var socket               = "/tmp/rauschen.sock";
 var dataExtractionStream = require("./lib/data-extraction-stream.js");
 var dataEnrichStream     = require("./lib/data-enrich-stream.js");
-var persistenceStream    = require("./lib/persistence-stream.js").create();
-
+var persistenceStream    = require("./lib/persistence-stream.js");
 
 var timingStream = timing.createStream();
 
