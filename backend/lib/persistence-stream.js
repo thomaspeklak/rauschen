@@ -3,6 +3,7 @@ var Db = require('mongodb').Db;
 var Connection = require('mongodb').Connection;
 var Server = require('mongodb').Server;
 
+//use a pause stream to allow the mongo adapter to connect before first write
 var pauseStream = require('pause-stream')();
 pauseStream.pause();
 
@@ -10,11 +11,9 @@ var Stream = require("stream");
 var ps = new Stream();
 ps.writable = true;
 
-pauseStream.pipe(ps);
-
 ps.write = function (buf) {
     var data = JSON.parse(buf);
-    //timings.insert(data);
+    timings.insert(data);
 };
 
 ps.end = function (buf) {
@@ -25,6 +24,8 @@ ps.end = function (buf) {
 ps.destroy = function(){
     this.writeable = false;
 };
+
+pauseStream.pipe(ps);
 
 
 var db = new Db('rauschen', new Server("127.0.0.1", 27017, {auto_reconnect: true, poolSize: 40}), {safe:false, native_parser: true});
