@@ -32,7 +32,9 @@
         , "async"       : "*"
         , "useragent"   : "*"
         , "through"     : "*"
+        , "pause-stream": "*"
         , "stream-serializer" : "*"
+        , "mongodb"     : "*"
     },
     "devDependencies": {
         "coffee-script" : "*"
