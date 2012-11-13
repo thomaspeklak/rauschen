@@ -9,10 +9,10 @@ var processStream = function(data, stream){
         geo: function geoEnricher(cb){
             geoip(data.remoteAddress, cb);
         },
-        userAgentData: function(cb){
+        userAgent: function(cb){
             userAgent(data.userAgent, cb);
         },
-        url: function(cb){
+        referer: function(cb){
             url(data.referer, cb);
         }
 
