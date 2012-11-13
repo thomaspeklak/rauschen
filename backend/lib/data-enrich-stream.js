@@ -2,6 +2,7 @@ var through     = require("through");
 var async       = require("async");
 var geoip       = require("./geoip");
 var userAgent   = require("./user-agent-detector");
+var url         = require("./url-disector");
 
 module.exports = through(function write(data){
     if(typeof data !== 'string') return;
@@ -25,6 +26,14 @@ var processStream = function(data, stream){
             userAgent(data.userAgent, function(err, userAgentData){
                 if(!err){
                     data.userAgentData = userAgentData;
+                }
+                cb();
+            });
+        },
+        ref: function(cb){
+            url(data.referer, function(err, urlData){
+                if(!err){
+                    data.url = urlData;
                 }
                 cb();
             });
