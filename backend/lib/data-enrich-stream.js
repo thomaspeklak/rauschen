@@ -4,29 +4,25 @@ var geoip       = require("./geoip");
 var userAgent   = require("./user-agent-detector");
 var url         = require("./url-disector");
 
-var parallelEnrichers = {
-    geo: function(cb){
-        geoip(data.remoteAddress, function(err, geoData){
-            if(!err){ data.geo = geoData; }
-            cb();
-        });
-    },
-    userAgent: function(cb){
-        userAgent(data.userAgent, function(err, userAgentData){
-            if(!err){ data.userAgentData = userAgentData; }
-            cb();
-        });
-    },
-    referer: function(cb){
-        url(data.referer, function(err, urlData){
-            if(!err){ data.url = urlData; }
-            cb();
-        });
-    }
-};
-
 var processStream = function(data, stream){
-    async.parallel( parallelEnrichers, function(){
+    async.parallel({
+        geo: function geoEnricher(cb){
+            geoip(data.remoteAddress, cb);
+        },
+        userAgentData: function(cb){
+            userAgent(data.userAgent, cb);
+        },
+        url: function(cb){
+            url(data.referer, cb);
+        }
+
+    }, function(err, results){
+        Object.keys(results).forEach(function(key){
+            if(results[key]){
+                data[key] = results[key];
+            }
+        });
+
         stream.queue(JSON.stringify(data));
     });
 };
@@ -38,3 +34,4 @@ module.exports = through(function write(data){
 }, function end(){
     this.queue();
 });
+
