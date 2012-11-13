@@ -30,7 +30,7 @@ describe "Frontend", ->
 
     app.on('data', (data) ->
       data.should.eql(
-        performance: timing_factory.valid()
+        performance: timing_factory.valid_normalized()
         userAgent: userAgent
         referer: referer
         remoteAddress: remoteAddress

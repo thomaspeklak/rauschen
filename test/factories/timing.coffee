@@ -29,6 +29,33 @@ valid_timings =
     "redirectCount" : 0
     "type"          : 0
 
+valid_normalized_timings =
+  "memory":
+    "jsHeapSizeLimit" : 0
+    "usedJSHeapSize"  : 0
+    "totalJSHeapSize" : 0
+  "timing":
+    "loadEventEnd"               : 2599
+    "loadEventStart"             : 2593
+    "domComplete"                : 2593
+    "domContentLoadedEventEnd"   : 1620
+    "domContentLoadedEventStart" : 1575
+    "domInteractive"             : 1531
+    "domLoading"                 : 1320
+    "responseEnd"                : 1308
+    "responseStart"              : 1307
+    "requestStart"               : 816
+    "secureConnectionStart"      : 498
+    "connectEnd"                 : 816
+    "connectStart"               : 7
+    "domainLookupEnd"            : 2
+    "domainLookupStart"          : 2
+    "fetchStart"                 : 2
+    "navigationStart"            : 0
+  "navigation":
+    "redirectCount" : 0
+    "type"          : 0
+
 clone = (obj) ->
   if not obj? or typeof obj isnt 'object'
     return obj
@@ -40,6 +67,8 @@ clone = (obj) ->
 module.exports =
   valid: ->
     clone valid_timings
+  valid_normalized: ->
+    clone valid_normalized_timings
   invalid: ->
     invalid_timings = clone valid_timings
     invalid_timings.timing.navigationStart = valid_timings.timing.responseEnd
