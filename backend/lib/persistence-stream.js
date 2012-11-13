@@ -1,3 +1,4 @@
+var hostnameToCollection = require('./hostname-to-collection');
 //MongoDB
 var Db = require('mongodb').Db;
 var Connection = require('mongodb').Connection;
@@ -13,7 +14,10 @@ ps.writable = true;
 
 ps.write = function (buf) {
     var data = JSON.parse(buf);
-    timings.insert(data);
+    if(!data.url){ return; }
+    var collectionName = hostnameToCollection(data.url.hostname);
+    timingsCollection = db.collection(collectionName);
+    timingsCollection.insert(data);
 };
 
 ps.end = function (buf) {
@@ -37,6 +41,7 @@ db.open(function(err, db){
         process.exit();
     }
     timings = db.collection('timings');
+    console.log('starting persistence stream');
     pauseStream.resume();
 });
 
