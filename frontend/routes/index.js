@@ -9,6 +9,7 @@ module.exports = function(app){
         var performance = req.body;
 
         if(validate(performance.timing)){
+            performance.timing = normalize(performance.timing);
             app.emit('data', {
                 performance: performance,
                 userAgent: req.headers["user-agent"],
