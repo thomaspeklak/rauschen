@@ -11,26 +11,27 @@ var createCallback = function(type){
 };
 
 var StreamProcessor = function(data, stream){
-    this.count = 0;
-    this.data = data;
+    this.queue = 3;
+    this.data = JSON.parse(data);
     this.stream = stream;
-
-    geoip(data.remoteAddress , createCallback('geo').bind(this));
-    userAgent(data.userAgent , createCallback('userAgent').bind(this));
-    url(data.referer         , createCallback('referer').bind(this));
-
 };
+
+StreamProcessor.prototype.process = function(){
+    geoip(this.data.remoteAddress , createCallback('geo').bind(this));
+    userAgent(this.data.userAgent , createCallback('userAgent').bind(this));
+    url(this.data.referer         , createCallback('referer').bind(this));
+};
+
 StreamProcessor.prototype.passStream = function(type, result){
-    this.count += 1;
-    if(this.count == 3){
+    this.queue -= 1;
+    if(this.queue === 0){
         this.stream.queue(JSON.stringify(this.data));
     }
 };
 
 module.exports = through(function write(data){
     if(typeof data !== 'string') return;
-    var parsedData = JSON.parse(data);
-    new StreamProcessor(parsedData, this);
+    new StreamProcessor(data, this).process();
 }, function end(){
     this.queue();
 });
