@@ -3,27 +3,26 @@ var geoip       = require("./geoip");
 var userAgent   = require("./user-agent-detector");
 var url         = require("./url-disector");
 
+var createCallback = function(type){
+    return function(err, result){
+        if(result){ data[type] = result; }
+        passStream();
+    };
+};
+
 var processStream = function(data, stream){
     var count = 0;
-    var passStream = function(){
+    this.data = data;
+    this.passStream = function(type, result){
         count += 1;
         if(count == 3){
             stream.queue(JSON.stringify(data));
         }
     };
 
-    geoip(data.remoteAddress, function(err, result){
-        if(result){ data.geo = result;}
-        passStream();
-    });
-    userAgent(data.userAgent, function(err, result){
-        if(result){ data.userAgent = result ;}
-        passStream();
-    });
-    url(data.referer, function(err, result){
-        if(result){ data.referer = result;}
-        passStream();
-    });
+    geoip(data.remoteAddress , createCallback('geo').bind(this));
+    userAgent(data.userAgent , createCallback('userAgent').bind(this));
+    url(data.referer         , createCallback('referer').bind(this));
 
 };
 
