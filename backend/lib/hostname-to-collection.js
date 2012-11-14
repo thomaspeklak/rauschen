@@ -1,8 +1,12 @@
+var dots = /\./g;
+var dashes = /-/g;
+var nonAlphaNumeric = /[^a-z0-9_]/g;
+
 module.exports = function(hostname){
     return hostname
-        .replace(/\./g, '_')
-        .replace(/-/g, '_')
+        .replace(dots, '_')
+        .replace(dashes, '_')
         .toLowerCase()
-        .replace(/[^a-z0-9_]/g, '')
+        .replace(nonAlphaNumeric, '')
         ;
 };
