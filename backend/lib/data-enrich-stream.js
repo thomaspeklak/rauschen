@@ -1,30 +1,30 @@
 var through     = require("through");
-var async       = require("async");
 var geoip       = require("./geoip");
 var userAgent   = require("./user-agent-detector");
 var url         = require("./url-disector");
 
 var processStream = function(data, stream){
-    async.parallel({
-        geo: function geoEnricher(cb){
-            geoip(data.remoteAddress, cb);
-        },
-        userAgent: function(cb){
-            userAgent(data.userAgent, cb);
-        },
-        referer: function(cb){
-            url(data.referer, cb);
+    var count = 0;
+    var passStream = function(){
+        count += 1;
+        if(count == 3){
+            stream.queue(JSON.stringify(data));
         }
+    };
 
-    }, function(err, results){
-        Object.keys(results).forEach(function(key){
-            if(results[key]){
-                data[key] = results[key];
-            }
-        });
-
-        stream.queue(JSON.stringify(data));
+    geoip(data.remoteAddress, function(err, result){
+        if(result){ data.geo = result;}
+        passStream();
     });
+    userAgent(data.userAgent, function(err, result){
+        if(result){ data.userAgent = result ;}
+        passStream();
+    });
+    url(data.referer, function(err, result){
+        if(result){ data.referer = result;}
+        passStream();
+    });
+
 };
 
 module.exports = through(function write(data){

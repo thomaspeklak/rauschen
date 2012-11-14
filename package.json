@@ -29,7 +29,6 @@
         , "scuttlebutt" : "*"
         , "ecstatic"    : "*"
         , "geoip"       : "*"
-        , "async"       : "*"
         , "useragent"   : "*"
         , "through"     : "*"
         , "pause-stream": "*"
