@@ -44,4 +44,16 @@ describe("GeoipData", function(){
             done();
         });
     });
+    it("should return nothibg on local ip", function(done){
+        geoipData("127.0.0.1", function(err, data){
+            (data === null).should.be.ok;
+            done();
+        });
+    });
+    it("should return nothibg on local ip", function(done){
+        geoipData("10.0.0.1", function(err, data){
+            (data === null).should.be.ok;
+            done();
+        });
+    });
 });
