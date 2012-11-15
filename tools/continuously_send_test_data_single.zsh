@@ -1,4 +1,4 @@
 while (true)
 do
-  test/send_test_data.sh
+  tools/send_test_data.sh
 done
