@@ -4,9 +4,6 @@ var validate  = require("../lib/timings_validate.js");
 
 module.exports = function(app) {
     app.post("/", function(req, res) {
-        // @TODO check why these header are not set in middleware
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "X-Requested-With, origin, Content-Type");
         var performance = req.body;
 
         if (validate(performance.timing)) {
