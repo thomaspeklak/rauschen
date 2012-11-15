@@ -7,4 +7,4 @@ server.use(domain_validator);
 
 require('./lib/distributor')(server);
 
-server.listen(3000);
+server.listen(Number(process.argv[2]) || 3000);
