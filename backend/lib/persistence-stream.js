@@ -1,15 +1,16 @@
 var hostnameToCollection = require('./hostname-to-collection');
+//
 //MongoDB
-var Db = require('mongodb').Db;
+var Db         = require('mongodb').Db;
 var Connection = require('mongodb').Connection;
-var Server = require('mongodb').Server;
+var Server     = require('mongodb').Server;
 
 //use a pause stream to allow the mongo adapter to connect before first write
 var pauseStream = require('pause-stream')();
 pauseStream.pause();
 
-var Stream = require("stream");
-var ps = new Stream();
+var Stream  = require("stream");
+var ps      = new Stream();
 ps.writable = true;
 
 ps.write = function (buf) {
@@ -31,16 +32,14 @@ ps.destroy = function(){
 
 pauseStream.pipe(ps);
 
-
-var db = new Db('rauschen', new Server("127.0.0.1", 27017, {auto_reconnect: true, poolSize: 40}), {safe:false, native_parser: true});
-var timings ;
+var server = new Server("127.0.0.1" , 27017 , {auto_reconnect: true, poolSize: 40});
+var db     = new Db('rauschen', server, {safe:false, native_parser: true});
 
 db.open(function(err, db){
     if(err){
         console.log(err);
         process.exit();
     }
-    timings = db.collection('timings');
     console.log('starting persistence stream');
     pauseStream.resume();
 });
