@@ -4,8 +4,8 @@ var Scuttlebutt = require('scuttlebutt/model');
 var timing      = new Scuttlebutt();
 var socket      = '/tmp/rauschen.sock';
 
-var distributor = function(server, remote){
-    server.on('data', function(data){
+var distributor = function(app, remote){
+    app.on('data', function(data){
         timing.set('data', data);
     });
 };
