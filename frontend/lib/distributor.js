@@ -14,7 +14,7 @@ var server = net.createServer(function(stream){
     stream.pipe(timing.createStream()).pipe(stream);
 });
 
-server.listen(socket, function(){ });
+server.listen(socket);
 
 var cleanup = function(err){
     if(err) { console.error(err); }
