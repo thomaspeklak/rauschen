@@ -25,6 +25,7 @@ module.exports = function(app) {
     });
 
     app.get("/client.js", function(req, res) {
+        res.header("Content-Type", "application/javascript");
         fs.createReadStream(__dirname + "/../public/client.js").pipe(res);
     });
 };
