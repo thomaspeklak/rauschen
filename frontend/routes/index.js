@@ -24,6 +24,11 @@ module.exports = function(app) {
         res.send();
     });
 
+    app.get("/", function(req, res){
+        res.header("Content-Type", "text/plain");
+        res.send("====RAUSCHEN\n\nThis is not the page you are looking for.");
+    });
+
     app.get("/client.js", function(req, res) {
         res.header("Content-Type", "application/javascript");
         fs.createReadStream(__dirname + "/../public/client.js").pipe(res);
