@@ -21,8 +21,6 @@ module.exports = function(app) {
         }
     });
     app.options("/", function(req, res) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "X-Requested-With, origin, Content-Type");
         res.send();
     });
 
