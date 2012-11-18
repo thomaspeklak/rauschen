@@ -34,7 +34,6 @@
         , "pause-stream": "*"
         , "stream-serializer" : "*"
         , "mongodb"     : "*"
-        , "q"           : "*"
     },
     "devDependencies": {
         "coffee-script" : "*"
@@ -45,6 +44,7 @@
         , "zombie"      : "*"
         , "growl"       : "*"
         , "forever"     : "*"
+        , "request"     : "*"
     },
     "bundleDependencies": [
     ],
