@@ -16,6 +16,7 @@ module.exports = function(app) {
             });
 
             res.send(204);
+            app.emit('new-request');
         } else {
             res.send(400);
         }

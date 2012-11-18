@@ -1,5 +1,6 @@
 var hostnameToCollection = require('./hostname-to-collection');
-//
+var requestCounter =  require("../../lib/request-counter");
+
 //MongoDB
 var Db         = require('mongodb').Db;
 var Connection = require('mongodb').Connection;
@@ -19,6 +20,7 @@ ps.write = function (buf) {
     var collectionName = hostnameToCollection(data.referer.hostname);
     timingsCollection = db.collection(collectionName);
     timingsCollection.insert(data);
+    this.emit('new-data');
 };
 
 ps.end = function (buf) {
@@ -31,6 +33,7 @@ ps.destroy = function(){
 };
 
 pauseStream.pipe(ps);
+new requestCounter(ps, 'new-data');
 
 var server = new Server("127.0.0.1" , 27017 , {auto_reconnect: true, poolSize: 40});
 var db     = new Db('rauschen', server, {safe:false, native_parser: true});
@@ -45,4 +48,3 @@ db.open(function(err, db){
 });
 
 module.exports = pauseStream;
-

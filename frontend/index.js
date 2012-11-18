@@ -1,5 +1,6 @@
 var server = require("./server");
 var path   = require('path');
+new require("../lib/request-counter")(server, 'new-request');
 
 var domains           = require("../config/domains");
 var domain_restrictor = require(path.join(__dirname, "lib", "domain-restrictor"))(domains);
