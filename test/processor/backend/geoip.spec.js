@@ -1,4 +1,4 @@
-var geoipData = require(__dirname + "/../../backend/lib/geoip");
+var geoipData = require(__dirname + "/../../processor/lib/geoip");
 
 describe("GeoipData", function(){
     it("should provide country for an IPv4", function(done){

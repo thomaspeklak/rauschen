@@ -1,4 +1,4 @@
-var userAgentDetector = require(__dirname + "/../../backend/lib/user-agent-detector.js");
+var userAgentDetector = require(__dirname + "/../../processor/lib/user-agent-detector.js");
 
 describe("User agent detector", function(){
     it("should provide information based an a user agent string", function(done){
