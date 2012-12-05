@@ -25,15 +25,16 @@
         "monitor"
     ],
     "dependencies" : {
-        "express"       : "*"
-        , "scuttlebutt" : "*"
-        , "ecstatic"    : "*"
-        , "geoip"       : "*"
-        , "useragent"   : "*"
-        , "through"     : "*"
-        , "pause-stream": "*"
+        "express"             : "*"
+        , "scuttlebutt"       : "*"
+        , "ipc-stream"   : "*"
+        , "ecstatic"          : "*"
+        , "geoip"             : "*"
+        , "useragent"         : "*"
+        , "through"           : "*"
+        , "pause-stream"      : "*"
         , "stream-serializer" : "*"
-        , "mongodb"     : "*"
+        , "mongodb"           : "*"
     },
     "devDependencies": {
         "coffee-script" : "*"
