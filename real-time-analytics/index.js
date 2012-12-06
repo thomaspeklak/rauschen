@@ -1,7 +1,2 @@
-var IpcStream   = require("ipc-stream");
-
-
-var parentStream = new IpcStream(process);
-
-parentStream.pipe(process.stdout);
+process.stdin.pipe(process.stdout);
 

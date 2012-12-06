@@ -1,13 +1,9 @@
 var net         = require("net");
 var Scuttlebutt = require("scuttlebutt/model");
-var IpcStream   = require("ipc-stream");
 
 var dataExtractionStream = require("./lib/data-extraction-stream.js");
 var dataEnrichStream     = require("./lib/data-enrich-stream.js");
 var persistenceStream    = require("./lib/persistence-stream.js");
-
-var rta = require('child_process').fork("./real-time-analytics/index.js");
-var rtaStream = new IpcStream(rta);
 
 var timing = new Scuttlebutt();
 var socket = "/tmp/rauschen.sock";
@@ -23,4 +19,7 @@ var enrichedStream = timingStream
 
 //enrichedStream.pipe(process.stdout);
 
-enrichedStream.pipe(rtaStream);
+var spawn = require('child_process').spawn;
+var args = [  __dirname + '/../real-time-analytics' ];
+var rta = spawn(process.execPath, args, { stdio: ['pipe', 1, 2, 'ipc'] });
+enrichedStream.pipe(rta.stdin);

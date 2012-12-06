@@ -27,7 +27,6 @@
     "dependencies" : {
         "express"             : "*"
         , "scuttlebutt"       : "*"
-        , "ipc-stream"   : "*"
         , "ecstatic"          : "*"
         , "geoip"             : "*"
         , "useragent"         : "*"
