@@ -1,4 +1,4 @@
-var Statistics = require("../../real-time-analytics/lib/statistics");
+var Statistics = require("../../real-time-analytics/lib/statistics-stream");
 var streamFactory = require("../factories/stream-factory");
 
 describe('RT Statistics', function(){
