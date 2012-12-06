@@ -18,6 +18,7 @@ var enrichedStream = timingStream
                         .pipe(persistenceStream);
 
 //enrichedStream.pipe(process.stdout);
+//timingStream.pipe(process.stdout);
 
 var spawn = require('child_process').spawn;
 var args = [  __dirname + '/../real-time-analytics' ];

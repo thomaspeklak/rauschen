@@ -16,8 +16,8 @@ ps.writable = true;
 
 ps.write = function (buf) {
     var data = JSON.parse(buf);
-    if(!data.referer.hostname){ return console.log('no hostname'); }
-    var collectionName = hostnameToCollection(data.referer.hostname);
+    if(!data.referrer.hostname){ return console.log('no hostname'); }
+    var collectionName = hostnameToCollection(data.referrer.hostname);
     timingsCollection = db.collection(collectionName);
     timingsCollection.insert(data);
     this.emit('new-data');

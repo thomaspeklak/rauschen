@@ -18,7 +18,7 @@ var StreamProcessor = function(data, stream){
 StreamProcessor.prototype.process = function(){
     geoip(this.data.remoteAddress , createCallback('geo').bind(this));
     userAgent(this.data.userAgent , createCallback('userAgent').bind(this));
-    url(this.data.referer         , createCallback('referer').bind(this));
+    url(this.data.referrer         , createCallback('referrer').bind(this));
 };
 
 StreamProcessor.prototype.passStream = function(type, result){

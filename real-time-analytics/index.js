@@ -1,19 +1,21 @@
-var Statistics = require("./lib/statistics");
+console.log('spawning real time analytics');
+
+var aggregationStream = require("./lib/aggregation-stream");
 var statistics = {};
 
-process.stdin.write = function(data){
-    console.dir(data);
+process.stdin.resume();
 
-};
 process.stdin.on('data', function(buf){
-   var data = JSON.parse(buf);
-   if(!data.referrer.host) return;
+    var data = JSON.parse(buf);
+    if(!data.referrer.host) return;
 
-   var host = data.referrer.host;
-   if(!statistics[host]){
-        statistics[host] = new Statistics();
-   }
+    var host = data.referrer.host;
+    if(!statistics[host]){
+        statistics[host] = aggregationStream();
+        statistics[host].pipe(process.stdout);
+        statistics[host].pause();
+    }
 
-   statistics[host].push(data.performance.timing);
+    statistics[host].write(JSON.stringify(data.performance.timing));
 });
 
