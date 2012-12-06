@@ -11,7 +11,7 @@ module.exports = function(app) {
             app.emit('data', {
                 performance: performance,
                 userAgent: req.headers["user-agent"],
-                referer: req.headers.referer,
+                referrer: req.headers.referer,
                 remoteAddress: req.connection.remoteAddress
             });
 

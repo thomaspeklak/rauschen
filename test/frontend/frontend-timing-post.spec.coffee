@@ -25,14 +25,14 @@ describe "Frontend", ->
 
   it "should send valid timing data along with request data to the event system", (done) ->
     userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1215.0 Safari/537.2"
-    referer = "http://rauschen.info"
+    referrer = "http://rauschen.info"
     remoteAddress = "127.0.0.1"
 
     app.on('data', (data) ->
       data.should.eql(
         performance: timing_factory.valid_normalized()
         userAgent: userAgent
-        referer: referer
+        referrer: referrer
         remoteAddress: remoteAddress
       )
       done()
@@ -40,6 +40,6 @@ describe "Frontend", ->
     request(app)
       .post("/")
       .set("User-Agent", userAgent)
-      .set("Referer", referer)
+      .set("Referer", referrer)
       .send(timing_factory.valid())
       .end( (err, res) ->)
