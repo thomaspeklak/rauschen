@@ -24,3 +24,7 @@ var spawn = require('child_process').spawn;
 var args = [  __dirname + '/../real-time-analytics' ];
 var rta = spawn(process.execPath, args, { stdio: ['pipe', 1, 2, 'ipc'] });
 enrichedStream.pipe(rta.stdin);
+
+process.on("exit", function(){
+    rta.kill();
+});
