@@ -16,6 +16,7 @@ module.exports = function(interval){
     var timer = setInterval(function(){
         var stats = queue.join();
         if(stats){
+            console.log(Math.random());
             stream.queue(JSON.stringify(stats));
         }
     }, interval);

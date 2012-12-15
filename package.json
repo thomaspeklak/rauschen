@@ -32,6 +32,7 @@
         , "useragent"         : "*"
         , "through"           : "*"
         , "pause-stream"      : "*"
+        , "event-stream"      : "*"
         , "stream-serializer" : "*"
         , "mongodb"           : "*"
         , "shoe"              : "*"

@@ -14,8 +14,7 @@ var Stream  = require("stream");
 var ps      = new Stream();
 ps.writable = true;
 
-ps.write = function (buf) {
-    var data = JSON.parse(buf);
+ps.write = function (data) {
     if(!data.referrer.hostname){ return console.log('no hostname'); }
     var collectionName = hostnameToCollection(data.referrer.hostname);
     timingsCollection = db.collection(collectionName);

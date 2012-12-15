@@ -5,7 +5,7 @@ module.exports = through(function write(data){
     try{
         var parsedData = JSON.parse(data);
         if(typeof parsedData === 'object'){
-            this.queue(JSON.stringify(parsedData[1]));
+            this.queue(parsedData[0][1]);
         }
     } catch(e){ }
 }, function end(){
