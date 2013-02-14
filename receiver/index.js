@@ -1,0 +1,17 @@
+var server = require("./server");
+var path   = require("path");
+var config = require("../config");
+
+if (config.environment === "development") {
+    new require("../lib/request-counter")(server, "new-request");
+}
+
+var domainRestrictor = require(
+    path.join(__dirname, "lib", "domain-restrictor")
+)(config.domains);
+
+server.use(domainRestrictor);
+
+require("./lib/distributor")(server);
+
+server.listen(config.port);

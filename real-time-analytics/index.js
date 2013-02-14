@@ -14,7 +14,9 @@ process.stdin.pipe(es.mapSync(function(data) {
 }));
 
 var processData = function(data){
-    if (!data.referrer.host) return;
+    data = data.toString();
+    console.dir(data);
+    if (!data && !data.referrer && !data.referrer.host) return;
 
     var host = data.referrer.host;
     if (!statistics[host]) {

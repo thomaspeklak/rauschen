@@ -1,5 +1,5 @@
 request = require "supertest"
-app = require "../../reciever/server.js"
+app = require "../../receiver/server.js"
 
 describe "Frontend", ->
   it "should serve static files", (done) ->

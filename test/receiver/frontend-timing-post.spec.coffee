@@ -1,5 +1,5 @@
 request = require "supertest"
-app = require "../../reciever/server.js"
+app = require "../../receiver/server.js"
 DomainValidator = require('../factories/domain-validator.js')
 app.domainValidator = new DomainValidator(true)
 sinon = require "sinon"

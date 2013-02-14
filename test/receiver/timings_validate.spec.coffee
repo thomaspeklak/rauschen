@@ -1,4 +1,4 @@
-validate = require "../../reciever/lib/timings_validate.js"
+validate = require "../../receiver/lib/timings_validate.js"
 timing_factory = require "../factories/timing"
 
 describe 'Validate', ->
