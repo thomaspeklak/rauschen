@@ -9,16 +9,19 @@ var statistics = {};
 
 process.stdin.resume();
 
-process.stdin.pipe(es.parse()).pipe(es.map(function(data){
-    if(!data.referrer.host) return;
+process.stdin.pipe(es.mapSync(function(data) {
+    processData(data);
+}));
+
+var processData = function(data){
+    if (!data.referrer.host) return;
 
     var host = data.referrer.host;
-    if(!statistics[host]){
+    if (!statistics[host]) {
         statistics[host] = aggregationStream();
         statistics[host].pipe(logStream);
         statistics[host].pause();
     }
 
     statistics[host].write(JSON.stringify(data.performance.timing));
-}));
-
+};

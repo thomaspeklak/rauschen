@@ -1,4 +1,4 @@
-DomainValidator = require "../../frontend/lib/domain-restrictor"
+DomainValidator = require "../../reciever/lib/domain-restrictor"
 sinon = require("sinon")
 
 describe "Validate domain", ->

@@ -8,7 +8,6 @@ describe("User agent detector", function(){
             data.should.have.property("major", "22");
             data.should.have.property("minor", "0");
             data.should.have.property("patch", "1215");
-            data.should.have.property("os", "Mac OS X");
             done();
         });
     });
