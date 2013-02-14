@@ -1,6 +1,7 @@
 =Rauschen
 
-Rauschen is a website performance monitor that leverages the moderb browsers capabilities to report timings from the first user interaction until the request is finished. As this involves several parts like _domain lookup_ and _connectino latencies_ these values can not be reproduced on the server side. These valuable numbers are under the `window.performance`property that is accesible in most modern browsers. If you are interested to read more about the spec, you can find more information at ...
+Rauschen is a website performance monitor that leverages the modern browsers capabilities to report timings from the first user interaction until the request is finished. As this involves several parts like _domain lookup_ and _connectino latencies_ these values can not be reproduced on the server side. These valuable numbers are under the `window.performance`property that is accesible in most modern browsers. If you are interested to read more about the spec, you can find more information at ...
+
 
 ##Architecture
 
