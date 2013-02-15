@@ -1,4 +1,6 @@
-console.log('spawning real time analytics');
+"use strict";
+
+console.log("spawning real time analytics");
 
 var es = require("event-stream");
 var fs = require("fs");
@@ -7,15 +9,8 @@ var logStream = fs.createWriteStream(__dirname + "/../tmp/rta.log");
 var aggregationStream = require("./lib/aggregation-stream");
 var statistics = {};
 
-process.stdin.resume();
-
-process.stdin.pipe(es.mapSync(function(data) {
-    processData(data);
-}));
-
-var processData = function(data){
+var processData = function (data) {
     data = data.toString();
-    console.dir(data);
     if (!data && !data.referrer && !data.referrer.host) return;
 
     var host = data.referrer.host;
@@ -27,3 +22,9 @@ var processData = function(data){
 
     statistics[host].write(JSON.stringify(data.performance.timing));
 };
+
+process.stdin.resume();
+
+process.stdin.pipe(es.mapSync(function (data) {
+    processData(data);
+}));
