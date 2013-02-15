@@ -1,13 +1,15 @@
-module.exports = function(timings) {
+"use strict";
+
+module.exports = function (timings) {
     var base = timings.navigationStart;
 
-    var normalized_timings = {};
+    var normalizedTimings = {};
 
     for (var key in timings) {
         if (timings[key] !== 0) {
-            normalized_timings[key] = timings[key] - base;
+            normalizedTimings[key] = timings[key] - base;
         }
-    };
+    }
 
-    return normalized_timings
+    return normalizedTimings;
 };
