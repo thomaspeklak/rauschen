@@ -39,8 +39,16 @@ if (config.environment === "development") {
     new requestCounter(ps, "new-data");
 }
 
-var server = new Server(config.db.host, config.db.port , {auto_reconnect: true, poolSize: 40});
-var db     = new Db(config.db.database, server, {safe:false, native_parser: true});
+var server = new Server(
+    config.db.host,
+    config.db.port,
+    {auto_reconnect: true, poolSize: 40}
+);
+
+var db = new Db(
+    config.db.database,
+    server, {safe: false, native_parser: true}
+);
 
 db.open(function (err) {
     if (err) {

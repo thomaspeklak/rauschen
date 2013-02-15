@@ -1,7 +1,9 @@
-var useragent = require('useragent');
+"use strict";
 
-module.exports = function(UA, cb){
-    process.nextTick(function(){
+var useragent = require("useragent");
+
+module.exports = function (UA, cb) {
+    process.nextTick(function () {
         cb(null,  useragent.parse(UA));
     });
 };

@@ -1,6 +1,6 @@
 var Stream = require("stream");
 var sinon = require("sinon");
-
+Math.e
 module.exports = {
     readStream: function(){
         var s = new Stream();

@@ -1,3 +1,5 @@
+"use strict";
+
 var net = require("net");
 var Scuttlebutt = require("scuttlebutt/model");
 var es = require("event-stream");
@@ -13,26 +15,28 @@ var timingStream = timing.createStream();
 
 timingStream.pipe(net.connect(socket)).pipe(timingStream);
 
-var enrichedStream = timingStream.pipe(dataExtractionStream).pipe(dataEnrichStream);
+var enrichedStream = timingStream
+    .pipe(dataExtractionStream)
+    .pipe(dataEnrichStream);
 
 enrichedStream.pipe(persistenceStream);
 
 //enrichedStream.pipe(process.stdout);
 //timingStream.pipe(process.stdout);
 function spawnRTA() {
-    var spawn = require('child_process').spawn;
-    var args = ["--debug", __dirname + '/../real-time-analytics'];
+    var spawn = require("child_process").spawn;
+    var args = ["--debug", __dirname + "/../real-time-analytics"];
     var rta = spawn(process.execPath, args, {
-        stdio: ['pipe', 1, 2, 'ipc']
+        stdio: ["pipe", 1, 2, "ipc"]
     });
     enrichedStream.pipe(es.stringify()).pipe(rta.stdin);
 
-    rta.on('exit', function(code, signal) {
+    rta.on("exit", function (code, signal) {
         if (code === null) {
             spawnRTA();
         }
     });
-    process.on("exit", function() {
+    process.on("exit", function () {
         rta.kill();
     });
 }
