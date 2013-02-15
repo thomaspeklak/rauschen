@@ -17,3 +17,9 @@ server.use(domainRestrictor);
 require("./lib/distributor")(server);
 
 server.listen(config.port);
+
+process.send("receiver turned on");
+
+process.on("exit", function () {
+    process.send("receiver shutting down");
+});

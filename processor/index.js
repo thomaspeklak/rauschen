@@ -42,3 +42,6 @@ function spawnRTA() {
 }
 
 //spawnRTA();
+
+process.send("processor turned on");
+
