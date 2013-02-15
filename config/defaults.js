@@ -1,6 +1,13 @@
+"use strict";
+
+var path = require("path");
+
 module.exports =  {
     port : process.env.PORT || 3000,
     secret : "this is a secret",
+    sockets : {
+        receiver: path.join(__dirname, "..", "tmp", "rauschen.sock")
+    },
     db : {
         host: "localhost",
         port: 27017,

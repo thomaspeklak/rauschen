@@ -17,7 +17,7 @@ var ps      = new Stream();
 ps.writable = true;
 
 ps.write = function (data) {
-    if (!data.referrer.hostname) { return console.log("no hostname"); }
+    if (!data || !data.referrer.hostname) { return; }
     var collectionName = hostnameToCollection(data.referrer.hostname);
     var timingsCollection = db.collection(collectionName);
     timingsCollection.insert(data);
@@ -58,5 +58,6 @@ db.open(function (err) {
     console.log("starting persistence stream");
     pauseStream.resume();
 });
+
 
 module.exports = pauseStream;

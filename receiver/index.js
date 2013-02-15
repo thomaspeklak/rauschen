@@ -18,8 +18,10 @@ require("./lib/distributor")(server);
 
 server.listen(config.port);
 
-process.send("receiver turned on");
+if (process.send) {
+    process.send("receiver turned on");
 
-process.on("exit", function () {
-    process.send("receiver shutting down");
-});
+    process.on("exit", function () {
+        process.send("receiver shutting down");
+    });
+}
