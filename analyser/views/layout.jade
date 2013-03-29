@@ -1,0 +1,24 @@
+doctype 5
+html
+  head
+    title Generated with Bumm
+
+    meta(charset='UTF-8')
+
+    link(rel='stylesheet', href='/vendor/bootstrap/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/custom.css')
+
+    block scripts
+      script(src='/vendor/jquery/js/jquery.min.js')
+      script(src='/vendor/bootstrap/js/bootstrap.min.js')
+  body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container
+          a.brand(href="/") Generated with Bumm
+          ul.nav
+            li
+              a(href="#") Your navigation goes here
+
+    .container
+      block content

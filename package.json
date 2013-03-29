@@ -36,6 +36,8 @@
         , "stream-serializer" : "*"
         , "mongodb"           : "*"
         , "shoe"              : "*"
+        , "jade"              : ">0.0.1"
+        , "connect-mongo"     : "0.3.x"
     },
     "devDependencies": {
         "coffee-script" : "*"
