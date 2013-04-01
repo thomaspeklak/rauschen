@@ -12,6 +12,7 @@ var domainRestrictor = require(
     path.join(__dirname, "lib", "domain-restrictor")
 )(config.domains);
 
+server.enable("trust proxy");
 server.use(domainRestrictor);
 
 require("./lib/distributor")(server);
