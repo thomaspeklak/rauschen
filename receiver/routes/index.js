@@ -4,10 +4,6 @@ var fs        = require("fs");
 var normalize = require("../lib/timings_normalize.js");
 var validate  = require("../lib/timings_validate.js");
 
-var remoteAddress = function (req) {
-    return req.header("x-forwarded-for") || req.connection.remoteAddress;
-};
-
 module.exports = function (app) {
     app.post("/", function (req, res) {
         var performance = req.body;
@@ -18,7 +14,7 @@ module.exports = function (app) {
                 performance: performance,
                 userAgent: req.headers["user-agent"],
                 referrer: req.headers.referer,
-                remoteAddress: remoteAddress(req)
+                remoteAddress: req.ip
             });
 
             res.send(204);
