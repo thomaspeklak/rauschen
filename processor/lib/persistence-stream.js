@@ -47,7 +47,7 @@ var server = new Server(
 
 var db = new Db(
     config.db.database,
-    server, {safe: false, native_parser: true}
+    server, {safe: false}
 );
 
 db.open(function (err) {

@@ -6,7 +6,8 @@ module.exports =  {
     port : process.env.PORT || 3000,
     secret : "this is a secret",
     sockets : {
-        receiver: path.join(__dirname, "..", "tmp", "rauschen.sock")
+        receiver: path.join(__dirname, "..", "tmp", "rauschen.sock"),
+        processor: path.join(__dirname, "..", "tmp", "processor.sock"),
     },
     db : {
         host: "localhost",
@@ -21,6 +22,7 @@ module.exports =  {
     },
     domains: [
         "127.0.0.1",
-        "localhost:8000"
+        "localhost:8000",
+        "nur-ein.test.com"
     ]
 };

@@ -2,29 +2,48 @@
 
 console.log("spawning real time analytics");
 
-var es = require("event-stream");
 var fs = require("fs");
-var logStream = fs.createWriteStream(__dirname + "/../tmp/rta.log");
+var net         = require("net");
+var es = require("event-stream");
+var socket = require("../config").sockets.processor;
+var processingStream = require("./lib/processing-stream");
 
-var aggregationStream = require("./lib/aggregation-stream");
-var statistics = {};
 
-var processData = function (data) {
-    data = data.toString();
-    if (!data && !data.referrer && !data.referrer.host) return;
-
-    var host = data.referrer.host;
-    if (!statistics[host]) {
-        statistics[host] = aggregationStream();
-        statistics[host].pipe(logStream);
-        statistics[host].pause();
-    }
-
-    statistics[host].write(JSON.stringify(data.performance.timing));
+var msg = function (message) {
+    return function () {
+        console.log(message);
+    };
 };
 
-process.stdin.resume();
+var delayInitilization = function () {
+    console.log("real time analytics trying to connect to processor");
+    setTimeout(initilizeStream, 1000);
+};
 
-process.stdin.pipe(es.mapSync(function (data) {
-    processData(data);
-}));
+var initilizeStream = function () {
+
+    if (!fs.existsSync(socket)) {
+        return delayInitilization();
+    }
+
+
+    var connection = net.connect(socket);
+    var cleanupAndInitialize = function () {
+        connection.removeAllListeners();
+        delayInitilization();
+    };
+
+
+    connection.on("connect", msg("connecting to processor"));
+    connection.on("timeout", msg("stream timeout"));
+    connection.on("close", cleanupAndInitialize);
+
+    connection.pipe(processingStream(), {end: false});
+};
+
+process.on('uncaughtException', function (err) {
+    console.error('Caught exception: ' + err);
+    console.error(err.stack);
+});
+
+initilizeStream();
