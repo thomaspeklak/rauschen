@@ -28,6 +28,7 @@ Not currently implemented
 - node >= v0.8.0
 - mongodb >= 2.0
 - local geoip database
+- libgeoip
 
 ##Installation & Configuration
 
@@ -44,6 +45,8 @@ vim ./config/environment/development.json
 vim ./config/environment/production.json
 
 npm install         # to install your dependencies
+                    # be sure to have libgeoip installed otherwise you
+                    # get an error while installing node-geoip
 
 node reciever       # start the reciever
 node processor      # start the processor
