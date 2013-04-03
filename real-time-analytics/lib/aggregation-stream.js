@@ -7,8 +7,7 @@ module.exports = function (interval) {
     var queue = new StatsQueue();
     interval = interval || 1000;
 
-    var stream = through(function write(buf) {
-        var data = JSON.parse(buf);
+    var stream = through(function write(data) {
         queue.push(data);
     }, function end() {
         this.queue();
@@ -17,6 +16,7 @@ module.exports = function (interval) {
     var timer = setInterval(function () {
         var stats = queue.join();
         if (stats) {
+            debugger;
             stream.queue(JSON.stringify(stats));
         }
     }, interval);

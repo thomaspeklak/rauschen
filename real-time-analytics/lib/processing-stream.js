@@ -11,26 +11,24 @@ module.exports = function () {
     var stream = new Stream();
 
     stream.write = function (buffer) {
+        try {
         var data = JSON.parse(buffer);
-
-        //console.dir(data);
-    };
-
+        processData(data);
+        } catch (e) { } };
     return stream;
 };
 
 
 var statistics = {};
 var processData = function (data) {
-    data = data.toString();
     if (!data && !data.referrer && !data.referrer.host) return;
 
     var host = data.referrer.host;
     if (!statistics[host]) {
+        console.log("New aggregation stream for " + host);
         statistics[host] = aggregationStream();
         statistics[host].pipe(logStream);
-        statistics[host].pause();
+        //statistics[host].pause();
     }
-
-    statistics[host].write(JSON.stringify(data.performance.timing));
+    statistics[host].write(data.performance.timing);
 };
