@@ -15,6 +15,7 @@ var StreamProcessor = function (data, stream) {
     this.queue  = 3;
     this.data   = data;
     this.stream = stream;
+    this.data.createdAt = new Date();
 };
 
 StreamProcessor.prototype.start = function () {
@@ -23,7 +24,7 @@ StreamProcessor.prototype.start = function () {
     url(this.data.referrer,        createCallback("referrer").bind(this));
 };
 
-StreamProcessor.prototype.passStream = function (type, result) {
+StreamProcessor.prototype.passStream = function () {
     this.queue -= 1;
     if (this.queue === 0) {
         this.stream.queue(this.data);
