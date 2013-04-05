@@ -3,7 +3,7 @@
 var path = require("path");
 var express = require("express");
 var http = require("http");
-var config = require("w./config");
+var config = require("./config");
 var MongoStore = require("connect-mongo")(express);
 
 var app = express();
