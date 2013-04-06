@@ -38,7 +38,7 @@ app.configure(function(){
         secret: config.sessionSecret,
         store: new MongoStore({
             collection: "sessions",
-            db: app.db
+            url: config.db.url
         }),
         cookie: {
             path: "/",
