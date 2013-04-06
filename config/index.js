@@ -1,3 +1,4 @@
+var format = require("util").format;
 var defaults = require('./defaults');
 
 var env = process.env.NODE_ENV || 'development';
@@ -11,4 +12,10 @@ for (var key in overrides) {
     }
 }
 
-module.exports = defaults; 
+var db = defaults.db;
+
+var dbAuth = db.user ?  format("%s:%s@", db.user, db.password) : "";
+
+db.url = format("mongodb://%s%s:%s/%s", dbAuth, db.host, db.port, db.database);
+
+module.exports = defaults;

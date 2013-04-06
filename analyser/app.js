@@ -3,15 +3,26 @@
 var path = require("path");
 var express = require("express");
 var http = require("http");
-var config = require("./config");
-var MongoStore = require("connect-mongo")(express);
+var config = require("../config");
+var mongoskin = require("mongoskin");
+var MongoStore = require('connect-mongo')(express);
 
 var app = express();
+
+app.db = mongoskin.db(config.db.url + "?auto_reconnect=true", {safe: false});
 
 // Express settings
 app.disable("x-powered-by");
 
 // Configuration
+app.configure("development", function(){
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+});
+
+app.configure("production", function(){
+    app.use(express.errorHandler());
+});
+
 app.configure(function(){
     app.set("views", __dirname + "/views");
     app.set("view engine", "jade");
@@ -27,7 +38,7 @@ app.configure(function(){
         secret: config.sessionSecret,
         store: new MongoStore({
             collection: "sessions",
-            mongoose_connection: mongooseConnection.connections[0]
+            db: app.db
         }),
         cookie: {
             path: "/",
@@ -38,14 +49,6 @@ app.configure(function(){
 
     app.use(app.router);
     app.use(express.static(path.join(__dirname, "public")));
-});
-
-app.configure("development", function(){
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
-
-app.configure("production", function(){
-    app.use(express.errorHandler());
 });
 
 require("./helpers")(app);

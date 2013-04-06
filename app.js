@@ -17,7 +17,16 @@ function startProcessor () {
     processor.on("message", function (message) {
         console.log(message);
     }).on("exit", function () {
-        console.log("receiver shutting down");
+        console.log("processor shutting down");
+    });
+}
+
+function startAnalyser () {
+    analyser = cp.fork("./analyser/app");
+    analyser.on("message", function (message) {
+        console.log(message);
+    }).on("exit", function () {
+        console.log("analyser shutting down");
     });
 }
 
@@ -25,10 +34,13 @@ function startProcessor () {
 var shutdown = function () {
     receiver.kill();
     processor.kill();
+    analyser.kill();
 };
+
+startReceiver();
+startProcessor();
+startAnalyser();
 
 process.on("exit", shutdown);
 process.on("uncaughtException", shutdown);
 
-startReceiver();
-startProcessor();
