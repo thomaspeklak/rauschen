@@ -4,14 +4,9 @@ var path = require("path");
 var express = require("express");
 var http = require("http");
 var config = require("../config");
-var mongoskin = require("mongoskin");
 var MongoStore = require("connect-mongo")(express);
 
 var app = express();
-
-app.db = mongoskin.db(config.db.url + "?auto_reconnect=true", {
-    safe: false
-});
 
 // Express settings
 app.disable("x-powered-by");
