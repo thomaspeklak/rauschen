@@ -10,9 +10,10 @@ module.exports = function (app) {
                 res.send(500);
             }
 
-            res.render("domains/index", {
+            res.json({
                 domains: domains
             });
         });
     });
+
 };
