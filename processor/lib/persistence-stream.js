@@ -1,7 +1,7 @@
 "use strict";
 
 var config  = require(__dirname + "/../../config");
-var hostnameToCollection = require("./hostname-to-collection");
+var hostnameToCollection = require("../../hostname-to-collection");
 var requestCounter =  require("../../lib/request-counter");
 
 //MongoDB

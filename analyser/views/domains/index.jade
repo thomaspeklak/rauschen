@@ -8,6 +8,6 @@ block content
     section
         h2 Select a domain
         ul
-            each domain in domains
-                li: a(href="/domains/#{domain}")= domain
-                
+            each domain, collection in domains
+                li: a(href="/domains/#{collection}")= domain
+

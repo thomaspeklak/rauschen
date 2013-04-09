@@ -3,6 +3,7 @@ module.exports = {
         "test.com",
         "127.0.0.1",
         "localhost",
-        "localhost:8000"
+        "localhost:8000",,
+        "rauschen.info"
     ]
 };
