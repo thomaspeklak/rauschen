@@ -20,11 +20,11 @@ module.exports = function (app) {
 
     app.get("/domains/:slug", function (req, res) {
         db.collection(req.params.slug)
-            .statistics(60e3, {
+            .statistics(5e3, {
             createdAt: {
                 $lt: new Date
             }
-        }, 2)
+        }, 100)
             .pipe(res);
     });
 };
