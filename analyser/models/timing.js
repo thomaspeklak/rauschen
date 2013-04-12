@@ -47,7 +47,7 @@ var round = function (date, timespan) {
 config.domains.forEach(function (domain) {
     var collection = hostnameToCollection(domain);
     db.bind(collection, {
-        statistics: function (timespan, from, to) {
+        statistics: function (timespan, finder, maxCount) {
             var s = JSONStream.stringify();
             this.open(function (err, collection) {
                 if (err) {
@@ -55,10 +55,12 @@ config.domains.forEach(function (domain) {
                     return s.end();
                 }
 
+                maxCount = maxCount || 100;
+                var count = 0;
                 var timeStamp = 0;
                 var batch = new Batch;
 
-                var dataStream = collection.find({}, {
+                var dataStream = collection.find(finder, {
                     _id: 0,
                     "performance.timing": 1,
                     "createdAt" : 1
@@ -67,16 +69,22 @@ config.domains.forEach(function (domain) {
                 dataStream.on("data", function (data) {
                     var newTimeStamp = round(data.createdAt, timespan);
 
-                    if (timeStamp == 0) {
-                        timeStamp = newTimeStamp;
-                    }
-
                     if (timeStamp > newTimeStamp) {
-                        timeStamp = newTimeStamp;
                         var stats = batch.statistics();
                         stats.timestamp = data.createdAt.getTime();
                         s.write(stats);
                         batch.reset();
+                    }
+
+                    if (timeStamp == 0 || timeStamp > newTimeStamp) {
+                        timeStamp = newTimeStamp;
+                        count += 1;
+                    }
+
+
+                    if (count > maxCount) {
+                        s.end();
+                        dataStream.destroy();
                     }
 
                     batch.add(data.performance.timing);
