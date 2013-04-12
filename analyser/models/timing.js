@@ -6,42 +6,38 @@ var hostnameToCollection = require("../../lib/hostname-to-collection");
 var JSONStream = require("JSONStream");
 
 var Batch = function () {
-    this.items = [];
+    this.reset();
 };
 
-Batch.prototype.push = function (item) {
-    this.items.push(item);
+Batch.prototype.add = function (item) {
+    var s = this.stats;
+    var keys = this.keys(item);
+
+    keys.forEach(function (key) {
+        var value = item[key];
+        if (value < s.min[key] || s.min[key] == undefined) s.min[key] = value;
+        if (value > s.max[key] || s.max[key] == undefined) s.max[key] = value;
+        s.mean[key] = (((s.mean[key] || 0) * s.count) + value) / (s.count + 1);
+    });
+
+    s.count += 1;
+};
+
+Batch.prototype.keys = function (item) {
+   return this.timingKeys || Object.keys(item);
 };
 
 Batch.prototype.statistics  = function () {
-    var items = this.items;
-    if (items.length == 0) return {};
-
-    var keys = Object.keys(items[0]);
-
-    return items.reduce(function (p, c, i) {
-        keys.forEach(function (key) {
-            var value = c[key];
-            if (value < p.min[key] || p.min[key] == undefined) p.min[key] = value;
-            if (value > p.max[key] || p.max[key] == undefined) p.max[key] = value;
-            p.mean[key] = (p.mean[key] || 0) + value;
-
-            if (i == items.length - 1) {
-                p.mean[key] = p.mean[key] / items.length;
-            }
-        });
-
-        return p;
-    }, {
-        min: {},
-        max: {},
-        mean: {},
-        count: items.length
-    });
+    return this.stats;
 };
 
 Batch.prototype.reset = function () {
-    this.items = [];
+    this.stats = {
+        min: {},
+        max: {},
+        mean: {},
+        count: 0
+    };
 };
 
 var round = function (date, timespan) {
@@ -83,7 +79,7 @@ config.domains.forEach(function (domain) {
                         batch.reset();
                     }
 
-                    batch.push(data.performance.timing);
+                    batch.add(data.performance.timing);
                 });
 
                 dataStream.on("end", function (data) {
