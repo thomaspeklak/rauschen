@@ -1,4 +1,4 @@
-var h2c = require('../../processor/lib/hostname-to-collection');
+var h2c = require('../../lib/hostname-to-collection');
 
 describe('HostnameToCollection', function(){
     it('should replace all dots with underscores', function(){
