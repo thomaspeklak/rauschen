@@ -44,7 +44,7 @@ config.domains.forEach(function (domain) {
                         batch.reset();
                     }
 
-                    if (timeStamp == 0 || timeStamp > newTimeStamp) {
+                    if (timeStamp === 0 || timeStamp > newTimeStamp) {
                         timeStamp = newTimeStamp;
                         count += 1;
                     }
