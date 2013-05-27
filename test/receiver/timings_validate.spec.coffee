@@ -8,3 +8,7 @@ describe 'Validate', ->
   it "should return false on invalid timings", ->
     validate(timing_factory.invalid().timing).should.be.false
 
+  it "should not throw an error on no or invalid timings", ->
+    validate(null).should.be.false
+    validate({}).should.be.false
+
