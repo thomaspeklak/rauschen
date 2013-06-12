@@ -4,7 +4,7 @@ var cp = require("child_process");
 var processor, receiver, analyser;
 
 function startReceiver () {
-    receiver = cp.fork("./receiver");
+    receiver = cp.fork("./node_modules/nodemon", ["./receiver"], {cwd: __dirname });
     receiver.on("message", function (message) {
         console.log(message);
     }).on("exit", function () {
@@ -29,7 +29,6 @@ function startAnalyser () {
         console.log("analyser shutting down");
     });
 }
-
 
 var shutdown = function () {
     console.log("shutting down app");

@@ -18,7 +18,7 @@
         },
         "test": "node_modules/mocha/bin/mocha"
     },
-    "main": "./app.js",
+    "main": "./index.js",
     "repository": {
         "type": "git",
         "url": ""
