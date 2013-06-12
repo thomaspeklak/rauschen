@@ -13,7 +13,7 @@ describe('RT Statistics', function(){
         rs.sendData(timing);
 
         setTimeout(function(){
-            //ws.write.called.should.be.true;
+            ws.write.called.should.be.true;
             stats.stop();
             end();
         }, 25);
@@ -37,7 +37,7 @@ describe('RT Statistics', function(){
         }, 22);
 
         setTimeout(function(){
-            //ws.write.callCount.should.eql(2);
+            ws.write.callCount.should.eql(2);
             stats.stop();
             end();
         }, 70);

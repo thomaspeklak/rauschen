@@ -8,7 +8,8 @@ module.exports = function (interval) {
     interval = interval || 1000;
 
     var stream = through(function write(data) {
-        queue.push(data);
+        var timings = JSON.parse(data);
+        queue.push(timings);
     }, function end() {
         this.queue();
         clearInterval(timer);
