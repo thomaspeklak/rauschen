@@ -2,9 +2,17 @@
 
 var cp = require("child_process");
 var processor, receiver, analyser;
+var production = process.env.NODE_ENV === "production" ? true : false;
 
-function startReceiver () {
-    receiver = cp.fork("./node_modules/nodemon", ["./receiver"], {cwd: __dirname });
+function startReceiver() {
+    if (production) {
+        receiver = cp.fork("./receiver");
+    } else {
+        receiver = cp.fork("./node_modules/nodemon", ["./receiver"], {
+            cwd: __dirname
+        });
+    }
+
     receiver.on("message", function (message) {
         console.log(message);
     }).on("exit", function () {
@@ -12,8 +20,15 @@ function startReceiver () {
     });
 }
 
-function startProcessor () {
-    processor = cp.fork("./processor");
+function startProcessor() {
+    if (production) {
+        processor = cp.fork("./processor");
+    } else {
+        processor = cp.fork("./node_modules/nodemon", ["./processor"], {
+            cwd: __dirname
+        });
+    }
+
     processor.on("message", function (message) {
         console.log(message);
     }).on("exit", function () {
@@ -21,8 +36,15 @@ function startProcessor () {
     });
 }
 
-function startAnalyser () {
-    analyser = cp.fork("./analyser/app");
+function startAnalyser() {
+    if (production) {
+        analyser = cp.fork("./analyser/app");
+    } else {
+        analyser = cp.fork("./node_modules/nodemon", ["./analyser/app.js"], {
+            cwd: __dirname
+        });
+    }
+
     analyser.on("message", function (message) {
         console.log(message);
     }).on("exit", function () {
@@ -43,4 +65,3 @@ startAnalyser();
 
 process.on("exit", shutdown);
 process.on("uncaughtException", shutdown);
-
