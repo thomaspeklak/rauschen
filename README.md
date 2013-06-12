@@ -7,7 +7,7 @@ Rauschen is a website performance monitor that leverages the modern browsers cap
 
 Rauschen consist of several independent parts that collect and manipulate navigation timings, enrich the data with geolocation, user agent and url data and are able to represent the collected data. The components talk to each other over a socket connection.
 
-###Reviever
+###Receiver
 
 The receivers task is to hand the browser a script that in turn send the performance data back. It then checks the validity of the data and sends it to a TCP socket.
 
@@ -50,4 +50,8 @@ npm install         # to install your dependencies
 
 node receiver       # start the receiver
 node processor      # start the processor
+
+or
+
+node .              # will start all components
 ```
