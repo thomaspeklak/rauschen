@@ -12,7 +12,7 @@
     ],
     "scripts": {
         "start" : {
-            "reciever" : "node receiver",
+            "receiver" : "node receiver",
             "processor" : "node processor",
             "analyser" : "node analyser"
         },

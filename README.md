@@ -9,7 +9,7 @@ Rauschen consist of several independent parts that collect and manipulate naviga
 
 ###Reviever
 
-The recievers task is to hand the browser a script that in turn send the performance data back. It then checks the validity of the data and sends it to a TCP socket.
+The receivers task is to hand the browser a script that in turn send the performance data back. It then checks the validity of the data and sends it to a TCP socket.
 
 ###Processor
 
@@ -48,6 +48,6 @@ npm install         # to install your dependencies
                     # be sure to have libgeoip installed otherwise you
                     # get an error while installing node-geoip
 
-node reciever       # start the reciever
+node receiver       # start the receiver
 node processor      # start the processor
 ```

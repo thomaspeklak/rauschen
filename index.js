@@ -1,7 +1,7 @@
 "use strict";
 
 var cp = require("child_process");
-var processor, receiver;
+var processor, receiver, analyser;
 
 function startReceiver () {
     receiver = cp.fork("./receiver");
@@ -32,6 +32,7 @@ function startAnalyser () {
 
 
 var shutdown = function () {
+    console.log("shutting down app");
     receiver.kill();
     processor.kill();
     analyser.kill();

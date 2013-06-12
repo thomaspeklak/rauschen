@@ -16,7 +16,7 @@ server.use(domainRestrictor);
 
 require("./lib/distributor")(server);
 
-server.listen(config.port);
+server.listen(config.receiver.port);
 
 if (process.send) {
     process.send("receiver turned on");
