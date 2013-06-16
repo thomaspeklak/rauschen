@@ -1,10 +1,10 @@
 "use strict";
 
-var spawn = require("./lib/spawn");
+var fork = require("simple-fork");
 
-var receiver = spawn("./receiver", "receiver shutting down");
-var processor = spawn("./processor", "processor shutting down");
-var analyser = spawn("./analyser/app.js", "analyser shutting down");
+var receiver = fork("rausche-receiver", "receiver shutting down");
+var processor = fork("rausche-processor", "processor shutting down");
+var analyser = fork("rauschen-analyser", "analyser shutting down");
 
 var shutdown = function () {
     console.log("shutting down app");

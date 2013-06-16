@@ -1,65 +1,41 @@
 {
-    "name": "rauschen",
-    "preferGlobal": "true",
-    "version": "0.0.0",
-    "author": "Thomas Peklak <thomas.peklak@gmail.com>",
-    "description": "a website performance monitor that leverages window.performance.timing",
-    "contributors": [
-        {
-            "name": "Thomas Peklak",
-            "email": "thomas.peklak@gmail.com"
-        }
-    ],
-    "scripts": {
-        "start" : {
-            "receiver" : "node receiver",
-            "processor" : "node processor",
-            "analyser" : "node analyser"
-        },
-        "test": "node_modules/mocha/bin/mocha"
-    },
-    "main": "./index.js",
-    "repository": {
-        "type": "git",
-        "url": ""
-    },
-    "keywords": [
-        "server",
-        "web",
-        "performance",
-        "monitor"
-    ],
-    "dependencies" : {
-        "express"             : "*"
-        , "scuttlebutt"       : "*"
-        , "ecstatic"          : "*"
-        , "geoip"             : "*"
-        , "useragent"         : "*"
-        , "through"           : "*"
-        , "pause-stream"      : "*"
-        , "event-stream"      : "*"
-        , "stream-serializer" : "*"
-        , "mongodb"           : "*"
-        , "shoe"              : "*"
-        , "jade"              : ">0.0.1"
-        , "connect-mongo"     : "0.3.x"
-        , "mongoskin"         : "0.5.x"
-    },
-    "devDependencies": {
-        "coffee-script" : "*"
-        , "mocha"       : "*"
-        , "should"      : "*"
-        , "sinon"       : "*"
-        , "supertest"   : "*"
-        , "zombie"      : "*"
-        , "growl"       : "*"
-        , "forever"     : "*"
-        , "request"     : "*"
-    },
-    "bundleDependencies": [
-    ],
-    "license": "MIT",
-    "engine": {
-        "node": ">=0.8"
+  "name": "rauschen",
+  "preferGlobal": "true",
+  "version": "0.0.0",
+  "author": "Thomas Peklak <thomas.peklak@gmail.com>",
+  "description": "a website performance monitor that leverages window.performance.timing",
+  "contributors": [
+    {
+      "name": "Thomas Peklak",
+      "email": "thomas.peklak@gmail.com"
     }
+  ],
+  "scripts": {
+    "start": {
+      "receiver": "node receiver",
+      "processor": "node processor",
+      "analyser": "node analyser"
+    },
+    "test": "node_modules/mocha/bin/mocha"
+  },
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "server",
+    "web",
+    "performance",
+    "monitor"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "bundleDependencies": [],
+  "license": "MIT",
+  "engine": {
+    "node": ">=0.8"
+  }
 }
