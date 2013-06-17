@@ -32,6 +32,9 @@ Not currently implemented
 
 ##Installation & Configuration
 
+Needs update after refactoring
+
+<del>
 ```
 git clone https://github.com/thomaspeklak/Rauschen
 cd rauschen
@@ -55,3 +58,4 @@ or
 
 node .              # will start all components
 ```
+</del>
