@@ -1,12 +1,21 @@
 "use strict";
 
+var seaport = require("seaport");
 var fork = require("simple-fork");
 
-var receiver = fork("rausche-receiver", "receiver shutting down");
-var processor = fork("rausche-processor", "processor shutting down");
-var analyser = fork("rauschen-analyser", "analyser shutting down");
+var port = process.argv[2] || 9200;
+var s = seaport.createServer();
+s.listen(port);
 
-var shutdown = function () {
+var registry = require("rauschen-registry").server("localhost", port);
+//var receiver = fork("rauschen-receiver", ["localhost", port], "receiver shutting down");
+//var processor = fork("rauschen-processor", ["localhost", port], "processor shutting down");
+//var analyser = fork("rauschen-analyser", ["localhost", port], "analyser shutting down");
+
+var shutdown = function (e) {
+    if (e) {
+        console.error(e);
+    }
     console.log("shutting down app");
     receiver.kill();
     processor.kill();
